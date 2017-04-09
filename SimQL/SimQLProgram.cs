@@ -18,27 +18,30 @@ namespace SimQLTask
             }
         }
 
-        public static IEnumerable<string> ExecuteQueries(string json)
-		{
-            var jObject = JObject.Parse(json);
-		    return new[] {"a.x = 3.14", "a.b.c = 15", "a.c.c = 9", "z = 42"};
-		    //   var folders = jObject.SelectTokens("data[*]");
-		    //         //var data = (JObject)jObject["data"];
-		    //         var data = jObject["data"];
-		    //         var queries = jObject["queries"].ToObject<string[]>();
-		    //// TODO
-		    //return queries.Select(q => "0");
+	    public static IEnumerable<string> ExecuteQueries(string json)
+	    {
+	        var jObject = JObject.Parse(json);
 
+	        var data = jObject["data"];
+	        var queries = jObject["queries"].ToObject<string[]>();
+	        foreach (var query in queries)
+	        {
+	            var localData = data;
+	            var splittedQuery = query.Split('.').ToList();
+	            foreach (var symbol in splittedQuery)
+	            {
+	                localData = GetToken(localData, symbol);
+	                ;
+	            }
+                yield return query + " = " + localData.Value<double>().ToString(CultureInfo.InvariantCulture);
+	        }
+	    }
 
-		    //var children = jObject["data"].Children().ToList();
-		    //foreach (var child in children)
-		    //{
+	    public static JToken GetToken(JToken token, string tokenName)
+	    {
 
-		    //}
-		    //;
-		    //return null;
+	        return token.SelectTokens($"{tokenName}").First();
 
-		}
-
+	    }
     }
 }
