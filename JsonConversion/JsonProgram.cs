@@ -37,7 +37,7 @@ namespace JsonConversion
                 .Select(
                     p => new ProductV3(p.Key, p.Value.name, Convert.ToDouble(p.Value.price), p.Value.count))
                     .ToList();
-            var v3 = new V3Data (v2Data.version,products);
+            var v3 = new V3Data ("3",products);
 	        
 	        return v3;
 	    }
