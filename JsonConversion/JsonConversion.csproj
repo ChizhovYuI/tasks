@@ -53,8 +53,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JsonProgram.cs" />
-    <Compile Include="Product.cs" />
+    <Compile Include="JsonProgram_Should.cs" />
+    <Compile Include="ProductV2.cs" />
+    <Compile Include="ProductV3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="V2Data.cs" />
+    <Compile Include="V3Data.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
