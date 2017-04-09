@@ -49,14 +49,6 @@ namespace JsonConversion
         {
             return JsonProgram.DeserializeJson(inputString);
         }
-
-        //[Test]
-        //public void SerializeGoodObject()
-        //{
-        //    var str= JsonProgram.SerializeV3Data(newData);
-        //    var fileStr = File.ReadAllText("1.v3.json");
-        //    Assert.AreEqual(fileStr,str);
-        //}
         [Test]
         public void DeserializeSecondJson()
         {
