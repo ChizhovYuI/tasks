@@ -12,17 +12,30 @@ namespace SimQLTask
 		static void Main(string[] args)
 		{
 			var json = Console.In.ReadToEnd();
-			foreach (var result in ExecuteQueries(json))
-				Console.WriteLine(result);
+		    foreach (var parsedResult in ExecuteQueries(json))
+		    {
+		        try
+		        {
+		            var result = int.Parse(parsedResult);
+		            Console.WriteLine(result);
+		        }
+		        catch
+		        {
+                    var result = double.Parse(parsedResult);
+                    Console.WriteLine(result);
+                }
+		    }
 		}
 
 		public static IEnumerable<string> ExecuteQueries(string json)
 		{
 			var jObject = JObject.Parse(json);
-			var data = (JObject)jObject["data"];
-			var queries = jObject["queries"].ToObject<string[]>();
+            //var data = (JObject)jObject["data"];
+            var data = (JArray)jObject["data"];
+            var queries = jObject["queries"].ToObject<string[]>();
 			// TODO
-			return queries.Select(q => "TODO");
+			return queries.Select(q => "0");
 		}
+
 	}
 }
