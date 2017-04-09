@@ -50,5 +50,14 @@ namespace JsonConversion
             var data = JsonProgram.DeserializeJson(inputString);
             Assert.IsTrue(data.constants.Any(x=>x.Key!=null));
         }
+
+        [Test]
+        public void ConvertSecondJson()
+        {
+            inputString = File.ReadAllText("test.json");
+            var data = JsonProgram.DeserializeJson(inputString);
+            var e = JsonProgram.ConvertV2DataToV3Data(data);
+            Assert.IsTrue(e.products.Any(x=>x.price== 126.444));
+        }
     }
 }
