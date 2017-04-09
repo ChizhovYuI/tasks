@@ -12,7 +12,7 @@ namespace EvalTask
     {
         public string Evaluate(string s, string param)
         {
-            var interpreter= new Interpreter();
+            var interpreter = new Interpreter();
             string result;
             try
             {
@@ -20,7 +20,7 @@ namespace EvalTask
                 var p = new List<Parameter>();
                 foreach (var kvp in jObject)
                 {
-                    p.Add(new Parameter(kvp.Key, ((JValue)kvp.Value).Value));
+                    p.Add(new Parameter(kvp.Key, ((JValue) kvp.Value).Value));
                 }
                 result = interpreter.Eval(s, p.ToArray()).ToString();
             }
@@ -34,7 +34,6 @@ namespace EvalTask
                 return double.IsInfinity(res) || double.IsNaN(res) ? "error" : result;
             }
             return "error";
-
         }
     }
 }
