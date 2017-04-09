@@ -9,7 +9,7 @@ namespace EvalTask
         {
             string input = Console.In.ReadToEnd();
             var lines = input.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
-            var expr = lines[0].Replace(",", ".");
+            var expr = lines[0].Replace(",", ".").Replace("'","");
             var json = string.Join("", lines.Skip(1));
             try
             {
