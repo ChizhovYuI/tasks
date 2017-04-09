@@ -34,7 +34,7 @@ namespace SimQLTask
 	                localData = GetToken(localData, symbol);
 	                if (localData == null) break;
 	            }
-	            if (localData == null) yield return "0";
+	            if (localData == null || !localData.HasValues) yield return "0";
                 else
                     yield return query + " = " + localData.Value<double>().ToString(CultureInfo.InvariantCulture);
 	        }
@@ -48,5 +48,7 @@ namespace SimQLTask
 	        }
 	        return token.SelectTokens($"{tokenName}").FirstOrDefault();
 	    }
+
+        //public static Dictionary<string, double>(JToken )
     }
 }
