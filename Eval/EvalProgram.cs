@@ -8,9 +8,8 @@ namespace EvalTask
 	{
 		static void Main(string[] args)
 		{
-		    
-			string input = Console.In.ReadToEnd();
-		    var lines = input.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+		    string input = Console.In.ReadToEnd();
+		    var lines = input.Split(new[] {'\r','\n'}, StringSplitOptions.RemoveEmptyEntries);
 		    var expr = lines[0];
 		    var json = string.Join("", lines.Skip(1));
             string output = new ExpressionEvaluator().Evaluate(expr, json);
