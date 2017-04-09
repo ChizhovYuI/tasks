@@ -30,18 +30,25 @@ namespace SimQLTask
 	            var splittedQuery = query.Split('.').ToList();
 	            foreach (var symbol in splittedQuery)
 	            {
+
 	                localData = GetToken(localData, symbol);
-	                ;
+	                if (localData == null) break;
 	            }
-                yield return query + " = " + localData.Value<double>().ToString(CultureInfo.InvariantCulture);
+	            if (localData == null || (localData.Count() == 0 && localData.Type == JTokenType.Object)) yield return "0";
+                else
+                    yield return query + " = " + localData.Value<double>().ToString(CultureInfo.InvariantCulture);
 	        }
 	    }
 
 	    public static JToken GetToken(JToken token, string tokenName)
 	    {
-
-	        return token.SelectTokens($"{tokenName}").First();
-
+	        if (token.Count() == 0)
+	        {
+	            return null;
+	        }
+	        return token.SelectTokens($"{tokenName}").FirstOrDefault();
 	    }
+
+        //public static Dictionary<string, double>(JToken )
     }
 }
