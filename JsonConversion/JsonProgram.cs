@@ -31,7 +31,7 @@ namespace JsonConversion
 	        var exString = JsonConvert.SerializeObject(v2Data.constants);
 	        var e = v2Data.products.Select(x => x.Value.price).ToList();
             List<ProductV3> products;
-            if (v2Data.constants!=null&&v2Data.constants.ContainsKey("pi"))
+            if (v2Data.constants!=null)
                 products = v2Data.products
                 .Zip(e,
                     (p,s) => new ProductV3(p.Key, p.Value.name, 
