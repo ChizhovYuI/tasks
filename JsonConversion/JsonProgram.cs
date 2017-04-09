@@ -28,7 +28,7 @@ namespace JsonConversion
 
 	    public static V3Data ConvertV2DataToV3Data(V2Data v2Data)
 	    {
-	        var v3 = new V3Data ("3",new List<ProductV3>());
+	        var v3 = new V3Data (v2Data.version,new List<ProductV3>());
 	        v3.products=v2Data.products
 	            .Select(
 	                p => new ProductV3 (p.Key, p.Value.name, p.Value.price, p.Value.count))
