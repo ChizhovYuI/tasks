@@ -33,7 +33,7 @@ namespace JsonConversion
         {
             V2Data data = PrepareV2data();
             var newData = JsonProgram.ConvertV2DataToV3Data(data);
-            Assert.IsTrue(newData is V3Data);
+            Assert.IsTrue(newData.version=="3");
         }
 
         private V2Data PrepareV2data()
@@ -62,7 +62,7 @@ namespace JsonConversion
             inputString = File.ReadAllText("test.json");
             var data = JsonProgram.DeserializeJson(inputString);
             var e = JsonProgram.ConvertV2DataToV3Data(data);
-            Assert.IsTrue(e.products.Any(x=>x.price== 126.444));
+            Assert.IsTrue(e.products.Any(x=>x.price== 45.762));
         }
     }
 }
