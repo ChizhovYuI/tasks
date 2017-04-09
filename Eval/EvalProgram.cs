@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace EvalTask
 {
@@ -10,7 +9,7 @@ namespace EvalTask
         {
             string input = Console.In.ReadToEnd();
             var lines = input.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
-            var expr = lines[0];
+            var expr = lines[0].Replace(",", ".");
             var json = string.Join("", lines.Skip(1));
             try
             {
