@@ -34,7 +34,8 @@ namespace SimQLTask
 	                localData = GetToken(localData, symbol);
 	                if (localData == null) break;
 	            }
-	            if (localData == null || (localData.Count() == 0 && localData.Type == JTokenType.Object)) yield return "0";
+	            if (localData == null) yield return query;
+                else if ((localData.Count() == 0 && localData.Type == JTokenType.Object)) yield return query;
                 else
                     yield return query + " = " + localData.Value<double>().ToString(CultureInfo.InvariantCulture);
 	        }
