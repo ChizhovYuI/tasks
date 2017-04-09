@@ -9,16 +9,20 @@ namespace EvalTask
 		static void Main(string[] args)
 		{
 		    string input = Console.In.ReadToEnd();
-		    if (input == "12 12")
-		    {
-                Console.WriteLine("12");
-                return;
-            }
 		    var lines = input.Split(new[] {'\r','\n'}, StringSplitOptions.RemoveEmptyEntries);
 		    var expr = lines[0];
 		    var json = string.Join("", lines.Skip(1));
-            string output = new ExpressionEvaluator().Evaluate(expr, json);
-			Console.WriteLine(output);
+		    try
+		    {
+                string output = new ExpressionEvaluator().Evaluate(expr, json);
+                Console.WriteLine(output);
+            }
+		    catch (Exception)
+		    {
+		        Console.WriteLine("error");
+		    }
+          
+
 		}
 	}
 
