@@ -13,6 +13,7 @@ namespace EvalTask
         public string Evaluate(string s, string param)
         {
             var interpreter= new Interpreter();
+            string result;
             try
             {
                 var jObject = JObject.Parse(param);
@@ -21,12 +22,18 @@ namespace EvalTask
                 {
                     p.Add(new Parameter(kvp.Key, ((JValue)kvp.Value).Value));
                 }
-                return interpreter.Eval(s, p.ToArray()).ToString();
+                result = interpreter.Eval(s, p.ToArray()).ToString();
             }
             catch (Exception)
             {
-                return interpreter.Eval(s).ToString();
+                result = interpreter.Eval(s).ToString();
             }
+            double res;
+            if (double.TryParse(result, out res))
+            {
+                return double.IsInfinity(res) || double.IsNaN(res) ? "error" : result;
+            }
+            return "error";
 
         }
     }

@@ -15,7 +15,7 @@ namespace EvalTask
 		    try
 		    {
                 string output = new ExpressionEvaluator().Evaluate(expr, json);
-                Console.WriteLine(output == "?" ? "error" : output);
+                Console.WriteLine(output);
             }
 		    catch (Exception)
 		    {
@@ -23,5 +23,10 @@ namespace EvalTask
 		    }
 		}
 	}
+
+    //class InputParser
+    //{
+    //    public Tuple<string,string> 
+    //}
 
 }
