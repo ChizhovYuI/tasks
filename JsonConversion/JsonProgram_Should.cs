@@ -10,6 +10,7 @@ namespace JsonConversion
     {
         private string firstJsonString;
         private string testJsonString;
+        private string thirdJsonString;
         private V3Data newData;
 
         [SetUp]
@@ -17,6 +18,7 @@ namespace JsonConversion
         {
             firstJsonString = File.ReadAllText("1.v2.json");
             testJsonString = File.ReadAllText("test.json");
+            thirdJsonString = File.ReadAllText("3.v2.json");
             newData = new V3Data("3",
                 new List<ProductV3>
                 {
@@ -69,6 +71,15 @@ namespace JsonConversion
             var data = JsonProgram.DeserializeJson(testJsonString);
             var e = JsonProgram.ConvertV2DataToV3Data(data);
             Assert.IsTrue(e.products.Any(x => x.price == 45.762));
+        }
+
+        [Test]
+        public void ConvertThirdJson()
+        {
+            var data = JsonProgram.DeserializeJson(thirdJsonString);
+            var e = JsonProgram.ConvertV2DataToV3Data(data);
+            var i = JsonProgram.SerializeV3Data(e);
+            Assert.IsTrue(i.Contains("dimensions"));
         }
     }
 }

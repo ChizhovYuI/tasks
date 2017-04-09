@@ -41,21 +41,37 @@ namespace JsonConversion
                     .Zip(e,
                         (p, s) => new ProductV3(p.Key, p.Value.name,
                             eval.Evaluate(s, exString) == "?" ? 0 : Convert.ToDouble(eval.Evaluate(s, exString)),
-                            p.Value.count))
+                            p.Value.count,GetDic(p.Value.size)
+                            ))
                     .ToList();
             else
                 products = v2Data.products
                     .Select(
-                        p => new ProductV3(p.Key, p.Value.name, Convert.ToDouble(p.Value.price), p.Value.count))
+                        p => new ProductV3(p.Key, p.Value.name, Convert.ToDouble(p.Value.price), p.Value.count, GetDic(p.Value.size)))
                     .ToList();
             var v3 = new V3Data("3", products);
             return v3;
         }
 
+        private static Dictionary<char, int> GetDic(int[] size)
+        {
+            if(size==null)
+                return new Dictionary<char, int>();
+            return new Dictionary<char, int>
+            {
+                {'l', size[2]},
+                {'w', size[0]},
+                {'h', size[1]}
+            };
+        }
+
 
         public static string SerializeV3Data(V3Data data)
         {
-            return JsonConvert.SerializeObject(data, Formatting.Indented);
+            return JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
+            {
+                NullValueHandling = NullValueHandling.Ignore
+            });
         }
     }
 }
