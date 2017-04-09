@@ -15,14 +15,12 @@ namespace EvalTask
 		    try
 		    {
                 string output = new ExpressionEvaluator().Evaluate(expr, json);
-                Console.WriteLine(output);
+                Console.WriteLine(output == "?" ? "error" : output);
             }
 		    catch (Exception)
 		    {
 		        Console.WriteLine("error");
 		    }
-          
-
 		}
 	}
 
