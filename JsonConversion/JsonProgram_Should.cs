@@ -24,16 +24,21 @@ namespace JsonConversion
         [Test]
         public void DeserializeGoodJson()
         {
-            var dataObject = JsonProgram.DeserializeJson(inputString);
+            var dataObject = PrepareV2data();
             Assert.IsTrue(dataObject is V2Data);
         }
 
         [Test]
         public void ConvertData()
         {
-            var data= JsonProgram.DeserializeJson(inputString);
+            V2Data data = PrepareV2data();
             var newData = JsonProgram.ConvertV2DataToV3Data(data);
             Assert.IsTrue(newData is V3Data);
+        }
+
+        private V2Data PrepareV2data()
+        {
+            return JsonProgram.DeserializeJson(inputString);
         }
 
         //[Test]
