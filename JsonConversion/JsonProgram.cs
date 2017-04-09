@@ -27,7 +27,7 @@ namespace JsonConversion
 	    public static V3Data ConvertV2DataToV3Data(V2Data v2Data)
 	    {
 	        List<ProductV3> products;
-            if (v2Data.constants.ContainsKey("pi"))
+            if (v2Data.constants!=null&&v2Data.constants.ContainsKey("pi"))
                 products = v2Data.products
                 .Select(
                     p => new ProductV3(p.Key, p.Value.name, 126.444, p.Value.count))
