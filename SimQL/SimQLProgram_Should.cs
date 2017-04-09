@@ -24,5 +24,14 @@ namespace SimQLTask
 				"'queries': ['sum(itemsCount)']}");
 			Assert.AreEqual(new[] { 42 }, results);
 		}
-	}
+
+        [Test]
+        public void SimpleSingleItem()
+        {
+            var results = SimQLProgram.ExecuteQueries(
+                "{\"data\":{\"a\":{\"x\":3.14,\"b\":{\"c\":15},\"c\":{\"c\":9}},\"z\":42}," +
+                "\"queries\":[\"a.x\",\"a.b.c\",\"a.c.c\",\"z\"]}");
+            Assert.AreEqual(new[] { 42 }, results);
+        }
+    }
 }
