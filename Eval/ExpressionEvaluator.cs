@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using DynamicExpresso;
@@ -12,7 +13,7 @@ namespace EvalTask
         public string Evaluate(string s, string param)
         {
             var interpreter= new Interpreter();
-            if (param != null)
+            try
             {
                 var jObject = JObject.Parse(param);
                 var p = new List<Parameter>();
@@ -22,7 +23,11 @@ namespace EvalTask
                 }
                 return interpreter.Eval(s, p.ToArray()).ToString();
             }
-            return interpreter.Eval(s).ToString();
+            catch (Exception)
+            {
+                return interpreter.Eval(s).ToString();
+            }
+
         }
     }
 }
