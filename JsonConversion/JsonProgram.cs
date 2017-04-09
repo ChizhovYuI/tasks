@@ -15,8 +15,10 @@ namespace JsonConversion
 			string json = Console.In.ReadToEnd();
 		    
 			//...
-			var v3 = "{ 'version':'3', 'products': 'TODO' }";
-			Console.Write(v3);
+			var v2 = DeserializeJson(json);
+		    var v3 = ConvertV2DataToV3Data(v2);
+		    var res = SerializeV3Data(v3);
+			Console.Write(res);
 		}
 
 	    public static V2Data DeserializeJson(string inputString)
