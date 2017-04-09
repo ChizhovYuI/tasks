@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace EvalTask
 {
@@ -6,8 +8,12 @@ namespace EvalTask
 	{
 		static void Main(string[] args)
 		{
+		    
 			string input = Console.In.ReadToEnd();
-			string output = new ExpressionEvaluator().Evaluate(input);
+		    var lines = input.Split(new[] {'\r', '\n'}, StringSplitOptions.RemoveEmptyEntries);
+		    var expr = lines[0];
+		    var json = lines.Length == 1 ? null: string.Join("", lines.Skip(1));
+            string output = new ExpressionEvaluator().Evaluate(expr, json);
 			Console.WriteLine(output);
 		}
 	}
